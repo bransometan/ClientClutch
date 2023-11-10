@@ -19,6 +19,25 @@
       <button type="submit">Analyze Fraud</button>
     </form>
     <br />
+    <form action="/security" method="post">
+      <label for="security_text">Enter customer's comments:</label>
+      <input type="text" id="security_text" name="security_text" required />
+      <button type="submit">Analyze Security Risks</button>
+    </form>
+    <br />
+    <form action="/compliconfid" method="post">
+      <label for="compliconfid_text">Enter customer's comments:</label>
+      <input
+        type="text"
+        id="compliconfid_text"
+        name="compliconfid_text"
+        required
+      />
+      <button type="submit">
+        Analyze Compliance and Confidentiality Risks
+      </button>
+    </form>
+    <br />
     <form action="/generate_reply" method="post">
       <label for="customer_message">Customer:</label>
       <input

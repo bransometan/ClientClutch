@@ -8,6 +8,13 @@
   <body>
     <h2>Result:</h2>
     <p>{{ result }}</p>
+
+    <h3>Recommended Actions:</h3>
+    <ul>
+      {% for action in recommended_actions %}
+      <li>{{ action }}</li>
+      {% endfor %}
+    </ul>
     <a href="/">Go back</a>
   </body>
 </html>
