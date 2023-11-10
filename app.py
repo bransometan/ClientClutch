@@ -6,7 +6,7 @@ app = Flask(__name__)
 # Set your OpenAI API key
 api_key = "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"
 
-# ... (Your sentiment analysis and conversation history code here)
+# ... (Your predictive code below here)
 
 # Call the OpenAI
 def analyze_sentiment(input_text):
@@ -44,6 +44,43 @@ def analyze_fraud_potential(text):
 
     return analysis_result
 
+def analyze_security_risks(input_text):
+    openai.api_key = api_key
+
+    # Customize the prompt for security risk analysis
+    prompt = f"Detect security risks in the following text: '{input_text}'"
+
+    # Adjust parameters as needed
+    response = openai.Completion.create(
+        engine="text-davinci-002",
+        prompt=prompt,
+        temperature=0.7,
+        max_tokens=150,  # Adjust based on the desired response length
+    )
+
+    # Extract the generated text from the API response
+    security_analysis_result = response.choices[0].text.strip()
+
+    return security_analysis_result
+
+def analyze_compliance_and_confidentiality_risks(input_text):
+    openai.api_key = api_key
+
+    # Customize the prompt for combined compliance and confidentiality risk analysis
+    prompt = f"Detect compliance and confidentiality risks in the following text: '{input_text}'"
+
+    # Adjust parameters as needed
+    response = openai.Completion.create(
+        engine="text-davinci-002",
+        prompt=prompt,
+        temperature=0.7,
+        max_tokens=150,  # Adjust based on the desired response length
+    )
+
+    # Extract the generated text from the API response
+    combined_analysis_result = response.choices[0].text.strip()
+
+    return combined_analysis_result
 
 conversation_history = []
 
@@ -85,6 +122,20 @@ def fraud_endpoint():
     fraud_analysis = analyze_fraud_potential(input_text)
 
     return render_template('result.html', result=fraud_analysis)
+
+@app.route('/security', methods=['POST'])
+def security_endpoint():
+    input_text = request.form['security_text']
+    security_analysis = analyze_security_risks(input_text)
+
+    return render_template('result.html', result=security_analysis)
+
+@app.route('/compliconfid', methods=['POST'])
+def compliconfid_endpoint():
+    input_text = request.form['compliconfid_text']
+    compliconfid_analysis = analyze_compliance_and_confidentiality_risks(input_text)
+
+    return render_template('result.html', result=compliconfid_analysis)
 
 @app.route('/generate_reply', methods=['POST'])
 def generate_reply_endpoint():
