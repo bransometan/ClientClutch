@@ -25,8 +25,27 @@ def analyze_sentiment(input_text):
 
     return generated_text
 
-conversation_history = []
+def analyze_fraud_potential(text):
+    openai.api_key = api_key
 
+    # You can customize the prompt based on your specific use case
+    prompt = f"Detect potential fraud in the following text: '{text}'"
+
+    # Adjust parameters as needed
+    response = openai.Completion.create(
+        engine="text-davinci-002",
+        prompt=prompt,
+        temperature=0.7,
+        max_tokens=100,
+    )
+
+    # Extract the generated text from the API response
+    analysis_result = response.choices[0].text.strip()
+
+    return analysis_result
+
+
+conversation_history = []
 
 def generate_reply(customer_message):
     openai.api_key = api_key
@@ -54,11 +73,18 @@ def index():
     return render_template('index.html')
 
 @app.route('/sentiment', methods=['POST'])
-def sentiment():
-    input_text = request.form['text']
+def sentiment_endpoint():
+    input_text = request.form['sentiment_text']
     sentiment_analysis = analyze_sentiment(input_text)
 
     return render_template('result.html', result=sentiment_analysis)
+
+@app.route('/fraud', methods=['POST'])
+def fraud_endpoint():
+    input_text = request.form['fraud_text']
+    fraud_analysis = analyze_fraud_potential(input_text)
+
+    return render_template('result.html', result=fraud_analysis)
 
 @app.route('/generate_reply', methods=['POST'])
 def generate_reply_endpoint():
