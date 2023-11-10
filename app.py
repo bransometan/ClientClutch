@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import openai
 
 app = Flask(__name__)
@@ -165,6 +165,79 @@ def generate_reply(customer_message):
 
     return generated_reply
 
+
+# POST endpoint to analyze sentiment
+@app.route('/api/sentiment', methods=['POST'])
+def analyze_sentiment_api():
+    try:
+        data = request.get_json()
+        input_text = data['text']
+
+        sentiment_result, recommended_actions = analyze_sentiment(input_text)
+
+        return jsonify({'result': sentiment_result, 'recommended_actions': recommended_actions})
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+# POST endpoint to analyze fraud potential
+@app.route('/api/fraud', methods=['POST'])
+def analyze_fraud_api():
+    try:
+        data = request.get_json()
+        input_text = data['text']
+
+        fraud_analysis_result, recommended_actions = analyze_fraud_potential(input_text)
+
+        return jsonify({'result': fraud_analysis_result, 'recommended_actions': recommended_actions})
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+# POST endpoint to analyze security risks
+@app.route('/api/security', methods=['POST'])
+def analyze_security_api():
+    try:
+        data = request.get_json()
+        input_text = data['text']
+
+        security_analysis_result, recommended_actions = analyze_security_risks(input_text)
+
+        return jsonify({'result': security_analysis_result, 'recommended_actions': recommended_actions})
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+# POST endpoint to analyze compliance and confidentiality risks
+@app.route('/api/compliconfid', methods=['POST'])
+def analyze_compliance_and_confidentiality_api():
+    try:
+        data = request.get_json()
+        input_text = data['text']
+
+        combined_analysis_result, recommended_actions = analyze_compliance_and_confidentiality_risks(input_text)
+
+        return jsonify({'result': combined_analysis_result, 'recommended_actions': recommended_actions})
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+# POST endpoint to generate a reply
+@app.route('/api/generate_reply', methods=['POST'])
+def generate_reply_api():
+    try:
+        data = request.get_json()
+        customer_message = data['message']
+
+        assistant_reply = generate_reply(customer_message)
+
+        return jsonify({'result': assistant_reply})
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+
+# HTML rendering endpoints (for demo user interface)
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -202,7 +275,7 @@ def generate_reply_endpoint():
     customer_message = request.form['customer_message']
     assistant_reply = generate_reply(customer_message)
 
-    return render_template('result.html', result=assistant_reply)
+    return render_template('result.html', result=assistant_reply)    
 
 if __name__ == '__main__':
     app.run(debug=True)
