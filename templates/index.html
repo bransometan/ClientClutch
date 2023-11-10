@@ -8,10 +8,17 @@
   <body>
     <h1>Welcome to the Client Clutch App</h1>
     <form action="/sentiment" method="post">
-      <label for="text">Enter customer's comments:</label>
-      <input type="text" id="text" name="text" required />
+      <label for="sentiment_text">Enter customer's comments:</label>
+      <input type="text" id="sentiment_text" name="sentiment_text" required />
       <button type="submit">Analyze Sentiment</button>
     </form>
+    <br />
+    <form action="/fraud" method="post">
+      <label for="fraud_text">Enter customer's comments:</label>
+      <input type="text" id="fraud_text" name="fraud_text" required />
+      <button type="submit">Analyze Fraud</button>
+    </form>
+    <br />
     <form action="/generate_reply" method="post">
       <label for="customer_message">Customer:</label>
       <input
@@ -22,5 +29,6 @@
       />
       <button type="submit">Generate Reply</button>
     </form>
+    <br />
   </body>
 </html>
