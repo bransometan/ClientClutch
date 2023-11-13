@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
 import openai
 
+# Allow CORS to all
 app = Flask(__name__)
 CORS(app)
 
@@ -10,7 +11,7 @@ api_key = "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"
 
 # ... (Your predictive code below here)
 
-# Rewrite new code
+# Rewrite more code
 def analyze_sentiment(input_text):
     openai.api_key = api_key
 
