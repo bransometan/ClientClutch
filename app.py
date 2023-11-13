@@ -10,7 +10,7 @@ api_key = "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"
 
 # ... (Your predictive code below here)
 
-# Call the OpenAI
+# Rewrite new code
 def analyze_sentiment(input_text):
     openai.api_key = api_key
 
