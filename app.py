@@ -43,6 +43,7 @@ def get_sentiments_recommended_actions(sentiment_result):
     else:
         return ["Continue monitoring the situation.", "Stay vigilant."]
     
+# Fraud Analysis function
 def analyze_fraud_potential(text):
     openai.api_key = api_key
 
