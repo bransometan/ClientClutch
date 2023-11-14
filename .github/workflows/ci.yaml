@@ -44,8 +44,9 @@ jobs:
 
       - name: 'Create env file'
         run: |
-          echo "OPENAI_KEY=${{ secrets.OPENAI_KEY }}" >> .env
-          source .env
+          touch .env
+          echo OPENAI_KEY=${{ secrets.OPENAI_KEY }} >> .env
+          cat .env
 
   run-tests:
     name: Run Tests
