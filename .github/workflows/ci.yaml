@@ -28,7 +28,6 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-  
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -41,15 +40,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-
-      - name: 'Create env file'
-        run: |
-          touch .env
-          echo API_KEY=${{ secrets.OPENAI_KEY }} >> .env
-          cat .env    
-
-      - name: Set API_KEY
-        run: echo "API_KEY=${{ secrets.OPENAI_KEY }}" >> $GITHUB_ENV
 
   run-tests:
     name: Run Tests
@@ -76,15 +66,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-
-      - name: 'Create env file'
-        run: |
-          touch .env
-          echo API_KEY=${{ secrets.OPENAI_KEY }} >> .env
-          cat .env    
-          
-      - name: Set API_KEY
-        run: echo "API_KEY=${{ secrets.OPENAI_KEY }}" >> $GITHUB_ENV
 
       - name: Run tests
         run: pytest
