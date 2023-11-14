@@ -42,6 +42,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: 'Create env file'
+        run: |
+          touch .env
+          echo API_KEY=${{ secrets.OPENAI_KEY }} >> .env
+          cat .env
+
   run-tests:
     name: Run Tests
     strategy:
