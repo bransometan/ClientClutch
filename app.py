@@ -12,6 +12,8 @@ api_key = "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"
 # ... (Your predictive code below here)
 
 # Rewrite more code
+
+
 def analyze_sentiment(input_text):
     openai.api_key = api_key
 
@@ -26,10 +28,11 @@ def analyze_sentiment(input_text):
     # Extract the generated text from the API response
     generated_text = response.choices[0].text.strip()
 
-     # You can add logic here to extract recommended actions based on the sentiment
+    # You can add logic here to extract recommended actions based on the sentiment
     recommended_actions = get_sentiments_recommended_actions(generated_text)
 
     return generated_text, recommended_actions
+
 
 def get_sentiments_recommended_actions(sentiment_result):
     # Add your logic to generate recommended actions based on sentiment
@@ -42,8 +45,10 @@ def get_sentiments_recommended_actions(sentiment_result):
         return ["Address the concerns raised.", "Take corrective actions."]
     else:
         return ["Continue monitoring the situation.", "Stay vigilant."]
-    
+
 # Fraud Analysis function
+
+
 def analyze_fraud_potential(text):
     openai.api_key = api_key
 
@@ -61,10 +66,11 @@ def analyze_fraud_potential(text):
     # Extract the generated text from the API response
     analysis_result = response.choices[0].text.strip()
 
-     # You can add logic here to extract recommended actions based on the fraud analysis
+    # You can add logic here to extract recommended actions based on the fraud analysis
     recommended_actions = get_fraud_recommended_actions(analysis_result)
 
     return analysis_result, recommended_actions
+
 
 def get_fraud_recommended_actions(fraud_analysis_result):
     # Add your logic to generate recommended actions based on fraud analysis
@@ -78,6 +84,8 @@ def get_fraud_recommended_actions(fraud_analysis_result):
     else:
         return ["Monitor the situation closely.", "Stay vigilant for any further signs of fraud."]
 # Security Analysis function
+
+
 def analyze_security_risks(input_text):
     openai.api_key = api_key
 
@@ -95,10 +103,12 @@ def analyze_security_risks(input_text):
     # Extract the generated text from the API response
     security_analysis_result = response.choices[0].text.strip()
 
-     # You can add logic here to extract recommended actions based on the security risk analysis
-    recommended_actions = get_security_recommended_actions(security_analysis_result)
+    # You can add logic here to extract recommended actions based on the security risk analysis
+    recommended_actions = get_security_recommended_actions(
+        security_analysis_result)
 
     return security_analysis_result, recommended_actions
+
 
 def get_security_recommended_actions(security_analysis_result):
     # Add your logic to generate recommended actions based on security risk analysis
@@ -111,6 +121,7 @@ def get_security_recommended_actions(security_analysis_result):
         return ["Review and address moderate security risks.", "Consider implementing additional security measures."]
     else:
         return ["Monitor the security situation closely.", "Regularly assess and update security protocols."]
+
 
 def analyze_compliance_and_confidentiality_risks(input_text):
     openai.api_key = api_key
@@ -129,10 +140,12 @@ def analyze_compliance_and_confidentiality_risks(input_text):
     # Extract the generated text from the API response
     combined_analysis_result = response.choices[0].text.strip()
 
-     # You can add logic here to extract recommended actions based on the combined analysis
-    recommended_actions = get_compliance_and_confidentiality_recommended_actions(combined_analysis_result)
+    # You can add logic here to extract recommended actions based on the combined analysis
+    recommended_actions = get_compliance_and_confidentiality_recommended_actions(
+        combined_analysis_result)
 
     return combined_analysis_result, recommended_actions
+
 
 def get_compliance_and_confidentiality_recommended_actions(combined_analysis_result):
     # Add your logic to generate recommended actions based on combined compliance and confidentiality risk analysis
@@ -146,13 +159,16 @@ def get_compliance_and_confidentiality_recommended_actions(combined_analysis_res
     else:
         return ["Monitor compliance and confidentiality closely.", "Regularly assess and update policies and security measures."]
 
+
 conversation_history = []
+
 
 def generate_reply(customer_message):
     openai.api_key = api_key
 
     # Extend the conversation
-    conversation_history.append({"role": "system", "content": "You are a helpful assistant."})
+    conversation_history.append(
+        {"role": "system", "content": "You are a helpful assistant."})
     conversation_history.append({"role": "user", "content": customer_message})
 
     # Generate a reply
@@ -165,7 +181,8 @@ def generate_reply(customer_message):
     generated_reply = response['choices'][0]['message']['content']
 
     # Append the generated reply to the conversation history
-    conversation_history.append({"role": "assistant", "content": generated_reply})
+    conversation_history.append(
+        {"role": "assistant", "content": generated_reply})
 
     return generated_reply
 
@@ -185,13 +202,16 @@ def analyze_sentiment_api():
         return jsonify({'error': str(e)}), 500
 
 # POST endpoint to analyze fraud potential
+
+
 @app.route('/api/fraud', methods=['POST'])
 def analyze_fraud_api():
     try:
         data = request.get_json()
         input_text = data['text']
 
-        fraud_analysis_result, recommended_actions = analyze_fraud_potential(input_text)
+        fraud_analysis_result, recommended_actions = analyze_fraud_potential(
+            input_text)
 
         return jsonify({'result': fraud_analysis_result, 'recommended_actions': recommended_actions})
 
@@ -199,13 +219,16 @@ def analyze_fraud_api():
         return jsonify({'error': str(e)}), 500
 
 # POST endpoint to analyze security risks
+
+
 @app.route('/api/security', methods=['POST'])
 def analyze_security_api():
     try:
         data = request.get_json()
         input_text = data['text']
 
-        security_analysis_result, recommended_actions = analyze_security_risks(input_text)
+        security_analysis_result, recommended_actions = analyze_security_risks(
+            input_text)
 
         return jsonify({'result': security_analysis_result, 'recommended_actions': recommended_actions})
 
@@ -213,13 +236,16 @@ def analyze_security_api():
         return jsonify({'error': str(e)}), 500
 
 # POST endpoint to analyze compliance and confidentiality risks
+
+
 @app.route('/api/compliconfid', methods=['POST'])
 def analyze_compliance_and_confidentiality_api():
     try:
         data = request.get_json()
         input_text = data['text']
 
-        combined_analysis_result, recommended_actions = analyze_compliance_and_confidentiality_risks(input_text)
+        combined_analysis_result, recommended_actions = analyze_compliance_and_confidentiality_risks(
+            input_text)
 
         return jsonify({'result': combined_analysis_result, 'recommended_actions': recommended_actions})
 
@@ -227,6 +253,8 @@ def analyze_compliance_and_confidentiality_api():
         return jsonify({'error': str(e)}), 500
 
 # POST endpoint to generate a reply
+
+
 @app.route('/api/generate_reply', methods=['POST'])
 def generate_reply_api():
     try:
@@ -239,12 +267,13 @@ def generate_reply_api():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-    
+
 
 # HTML rendering endpoints (for demo user interface)
 @app.route('/')
 def index():
     return render_template('index.html')
+
 
 @app.route('/sentiment', methods=['POST'])
 def sentiment_endpoint():
@@ -253,33 +282,41 @@ def sentiment_endpoint():
 
     return render_template('result.html', result=sentiment_result, recommended_actions=recommended_actions)
 
+
 @app.route('/fraud', methods=['POST'])
 def fraud_endpoint():
     input_text = request.form['fraud_text']
-    fraud_analysis_result, recommended_actions = analyze_fraud_potential(input_text)
+    fraud_analysis_result, recommended_actions = analyze_fraud_potential(
+        input_text)
 
     return render_template('result.html', result=fraud_analysis_result, recommended_actions=recommended_actions)
+
 
 @app.route('/security', methods=['POST'])
 def security_endpoint():
     input_text = request.form['security_text']
-    security_analysis_result, recommended_actions = analyze_security_risks(input_text)
+    security_analysis_result, recommended_actions = analyze_security_risks(
+        input_text)
 
     return render_template('result.html', result=security_analysis_result, recommended_actions=recommended_actions)
+
 
 @app.route('/compliconfid', methods=['POST'])
 def compliconfid_endpoint():
     input_text = request.form['compliconfid_text']
-    combined_analysis_result, recommended_actions = analyze_compliance_and_confidentiality_risks(input_text)
+    combined_analysis_result, recommended_actions = analyze_compliance_and_confidentiality_risks(
+        input_text)
 
     return render_template('result.html', result=combined_analysis_result, recommended_actions=recommended_actions)
+
 
 @app.route('/generate_reply', methods=['POST'])
 def generate_reply_endpoint():
     customer_message = request.form['customer_message']
     assistant_reply = generate_reply(customer_message)
 
-    return render_template('result.html', result=assistant_reply)    
+    return render_template('result.html', result=assistant_reply)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
