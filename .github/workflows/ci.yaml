@@ -22,7 +22,7 @@ jobs:
         run: pip install pylint
 
       - name: Code style check
-        run: pylint your_module_or_directory
+        run: pylint app.py
 
   build:
     name: Build
