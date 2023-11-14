@@ -42,11 +42,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: 'Create env file'
+      - name: Load environment variables
         run: |
-          touch .env
-          echo OPENAI_KEY=${{ secrets.OPENAI_KEY }} >> .env
-          cat .env
+        echo "OPENAI_KEY=${{ secrets.OPENAI_KEY }}" >> $GITHUB_ENV
 
   run-tests:
     name: Run Tests
