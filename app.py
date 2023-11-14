@@ -12,7 +12,7 @@ CORS(app)
 load_dotenv()
 
 # Set your OpenAI API key
-api_key = os.getenv('OPENAI_KEY')
+api_key = os.getenv('API_KEY')
 
 # ... (Your predictive code below here)
 
