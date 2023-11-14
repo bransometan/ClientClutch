@@ -1,13 +1,18 @@
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
+from dotenv import load_dotenv
 import openai
+import os
 
 # Allow CORS to all
 app = Flask(__name__)
 CORS(app)
 
+# Load env file
+load_dotenv()
+
 # Set your OpenAI API key
-api_key = "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"
+api_key = os.getenv('API_KEY')
 
 # ... (Your predictive code below here)
 
@@ -282,4 +287,5 @@ def generate_reply_endpoint():
     return render_template('result.html', result=assistant_reply)    
 
 if __name__ == '__main__':
+    app.debug = True
     app.run(host='0.0.0.0', port=5000)
