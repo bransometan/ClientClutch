@@ -11,10 +11,11 @@ ClientClutch, a 23/24 Sem 1 IS4301 Project by Scrum Master United is designed to
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
 - [Usage](#usage)
+- [Running Test with Pytest](#running-test-with-pytest)
+- [API Endpoints](#api-endpoints)
 - [Tech Stack](#tech-stack)
 - [Features](#features)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Getting Started
 
